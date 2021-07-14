@@ -1,7 +1,7 @@
 {
   "expo": {
-    "name": "react-native-rudux-saga",
-    "slug": "react-native-rudux-saga",
+    "name": "react-native-redux-saga",
+    "slug": "react-native-redux-saga",
     "version": "1.0.0",
     "orientation": "portrait",
     "icon": "./assets/icon.png",
