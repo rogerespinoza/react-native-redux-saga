@@ -1,31 +1,45 @@
-import { actionTypes } from './actions'
+import { usersTypes } from '../root-actions'
 
 const initialState = {
   dataSource : [
     {
-      key: '1',
+      id: '1',
       name: 'Mike',
-      age: 32,
-      address: '10 Downing Street',
+      phone: 3234322444,
+      email: 'mike@gmail.com',
     },
     {
-      key: '2',
+      id: '2',
       name: 'John',
-      age: 42,
-      address: '10 Downing Street',
+      phone: 422222222,
+      email: 'john@mail.com',
     },
   ]
 }
 
 export default (state = initialState, action) => {
   switch (action.type) {
-    case actionTypes.USERS_UPDATE:
-      console.log(action.payload);
-      // break; 
-      // return state;
+    case usersTypes.USERS_UPDATE:
       return {
         ...state,
         dataSource: action.payload
+      }
+    case usersTypes.USERS_TRY:
+      // console.log(usersTypes.USERS_TRY);
+      return {
+        ...state,
+      }
+    case usersTypes.USERS_SUCCESS:
+      // console.log(usersTypes.USERS_SUCCESS);
+      // console.log(action.payload);
+      return {
+        ...state,
+        dataSource: action.payload
+      }
+    case usersTypes.USERS_FAILED:
+      console.log(usersTypes.USERS_FAILED);
+      return {
+        ...state,
       }
     default:
       return state;

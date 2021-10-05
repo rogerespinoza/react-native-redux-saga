@@ -8,21 +8,21 @@ import {
 } from "react-native";
 import { styles as style1 } from "../styles";
 import { useDispatch, useSelector } from "react-redux";
-import { updateUserData } from '../redux/users/actions'
+import * as actions from '../redux/root-actions';
 
 export default function Screen2({ route, navigation }) {
 
   const [name, setName] = useState("");
-  const [age, setAge] = useState("");
-  const [address, setAddress] = useState("");
+  const [phone, setPhone] = useState("");
+  const [email, setEmail] = useState("");
 
   const dispatch = useDispatch()
   const users = useSelector((store) => store.users.dataSource);
 
   useEffect(() => {
     setName(route.params.item.name);
-    setAge(route.params.item.age);
-    setAddress(route.params.item.address);
+    setPhone(route.params.item.phone);
+    setEmail(route.params.item.email);
   }, []);
 
   const updateData = () => {
@@ -31,13 +31,13 @@ export default function Screen2({ route, navigation }) {
         item = {
           ...item,
           name: name,
-          age: age,
-          address: address
+          phone: phone,
+          email: email
         }
         return item
       } else  return item
     });
-    dispatch(updateUserData(usersAux));
+    dispatch({type: actions.usersTypes.USERS_UPDATE, payload: usersAux});
     navigation.navigate('Screen1');
   };
 
@@ -58,13 +58,13 @@ export default function Screen2({ route, navigation }) {
       </Text>
       <TextInput value={name} style={styles.textInput1} onChangeText={text => setName(text)} />
       <Text style={{ ...style1.title, fontSize: 20, marginVertical: 5 }}>
-        Age
+        Phone
       </Text>
-      <TextInput value={age.toString()} style={styles.textInput1} onChangeText={text => setAge(text)} />
+      <TextInput value={phone.toString()} style={styles.textInput1} onChangeText={text => setPhone(text)} />
       <Text style={{ ...style1.title, fontSize: 20, marginVertical: 5 }}>
-        Address
+        Email
       </Text>
-      <TextInput value={address} style={styles.textInput1} onChangeText={text => setAddress(text)} />
+      <TextInput value={email} style={styles.textInput1} onChangeText={text => setEmail(text)} />
       <View style={styles.buttonContainer}>
         <TouchableOpacity style={styles.button} onPress={updateData}>
           <Text

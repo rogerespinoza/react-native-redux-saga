@@ -5,18 +5,23 @@ import {
   TouchableOpacity,
   StyleSheet,
   ScrollView,
+  Button
 } from "react-native";
 import { styles as styles1 } from "../styles";
 
-import { useSelector } from "react-redux";
+import { useSelector, useDispatch } from "react-redux";
 
-const getUsers = (state) => {
-  const {users} = state;
-  return { users} 
-}
+import * as actions from '../redux/root-actions';
 
 export default function Screen1({ navigation }) {
   const users = useSelector((store) => store.users.dataSource);
+  const dispatch = useDispatch();
+
+
+  const tryGetUserData = () => {
+    dispatch({ type: actions.usersTypes.USERS_TRY});
+    // dispatch(actionsUsers.tryGetUserData());
+  };
   
   // useEffect(() => {
   //   console.log(users);
@@ -36,13 +41,13 @@ export default function Screen1({ navigation }) {
             <Text style={{ ...styles1.title, fontSize: 25 }}>{item.name}</Text>
           </View>
           <View style={styles.rowData}>
-            <Text style={{ ...styles1.title, fontSize: 20 }}>Age</Text>
-            <Text style={{ ...styles1.title, fontSize: 20 }}>{item.age}</Text>
+            <Text style={{ ...styles1.title, fontSize: 20 }}>Phone</Text>
+            <Text style={{ ...styles1.title, fontSize: 20 }}>{item.phone}</Text>
           </View>
           <View style={styles.rowData}>
-            <Text style={{ ...styles1.title, fontSize: 20 }}>Address</Text>
+            <Text style={{ ...styles1.title, fontSize: 20 }}>Email</Text>
             <Text style={{ ...styles1.title, fontSize: 20 }}>
-              {item.address}
+              {item.email}
             </Text>
           </View>
         </TouchableOpacity>
@@ -53,6 +58,11 @@ export default function Screen1({ navigation }) {
     <View style={styles1.center}>
       <ScrollView>
         <CardUsers />
+        <Button 
+          onPress={() => {
+            tryGetUserData();
+          }} 
+          title="Pressed" />
       </ScrollView>
     </View>
   );
